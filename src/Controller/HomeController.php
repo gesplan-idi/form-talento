@@ -10,95 +10,95 @@ namespace App\Controller;
  */
 class HomeController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        // Permitir acceso sin autenticación para 'create' e 'index'
+        $this->Authentication->allowUnauthenticated(['create', 'index', 'login']);
+    }
+
     /**
-     * Index method
+     * Index method: Página principal con opciones de login o crear usuario.
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
-        $home = $this->paginate($this->Home);
-
-        $this->set(compact('home'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Home id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $home = $this->Home->get($id, [
-            'contain' => [],
-        ]);
-
-        $this->set(compact('home'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $home = $this->Home->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $home = $this->Home->patchEntity($home, $this->request->getData());
-            if ($this->Home->save($home)) {
-                $this->Flash->success(__('The home has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The home could not be saved. Please, try again.'));
+        // Verificar si el usuario está logueado
+        if ($this->Identity->isLoggedIn()) {
+            return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
         }
-        $this->set(compact('home'));
+
+        // Mostrar opciones para crear usuario o iniciar sesión
+        $this->set('isLoggedIn', false);
     }
 
     /**
-     * Edit method
+     * Crear un nuevo usuario
      *
-     * @param string|null $id Home id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @return \Cake\Http\Response|null|void Redirige al login si se crea el usuario correctamente
      */
-    public function edit($id = null)
-    {
-        $home = $this->Home->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $home = $this->Home->patchEntity($home, $this->request->getData());
-            if ($this->Home->save($home)) {
-                $this->Flash->success(__('The home has been saved.'));
+    public function create()
+{
+    // Creamos una nueva entidad de usuario vacía
+    $user = $this->Users->newEmptyEntity();
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The home could not be saved. Please, try again.'));
-        }
-        $this->set(compact('home'));
-    }
+    // Verificamos si la solicitud es un POST (lo que indica que el formulario fue enviado)
+    if ($this->request->is('post')) {
+        // Cargamos los datos del formulario en la entidad
+        $user = $this->Users->patchEntity($user, $this->request->getData());
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Home id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $home = $this->Home->get($id);
-        if ($this->Home->delete($home)) {
-            $this->Flash->success(__('The home has been deleted.'));
+        // Verificamos si hay errores de validación al intentar guardar el usuario
+        if ($this->Users->save($user)) {
+            // Si se guarda correctamente, mostramos un mensaje de éxito
+            $this->Flash->success(__('Usuario creado con éxito.'));
+            // Redirigimos al índice o a la home para continuar con otras acciones
+            return $this->redirect(['action' => 'index']);
         } else {
-            $this->Flash->error(__('The home could not be deleted. Please, try again.'));
+            // Si hay errores de validación, mostramos un mensaje de error
+            $this->Flash->error(__('No se pudo crear el usuario. Por favor, corrige los errores.'));
+        }
+    }
+
+    // Pasamos la entidad a la vista para poder usarla en el formulario
+    $this->set(compact('user'));
+}
+
+    /**
+     * Login: iniciar sesión con DNI y contraseña
+     *
+     * @return \Cake\Http\Response|null|void Redirige al Dashboard si la autenticación es exitosa
+     */
+    public function login()
+    {
+        // Si ya está logueado, redirigir al Dashboard
+        if ($this->Identity->isLoggedIn()) {
+            return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
         }
 
+        if ($this->request->is('post')) {
+            // Buscar al usuario por DNI
+            $user = $this->Users->findByDni($this->request->getData('dni'))->first();
+
+            if ($user && password_verify($this->request->getData('password'), $user->password)) {
+                // Si la contraseña es correcta, iniciar sesión
+                $this->Identity->set($user);
+                return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
+            }
+
+            $this->Flash->error(__('DNI o contraseña incorrectos.'));
+        }
+    }
+
+    /**
+     * Logout: Cerrar sesión
+     *
+     * @return \Cake\Http\Response|null|void Redirige al inicio después del logout
+     */
+    public function logout()
+    {
+        $this->Identity->set(null);  // Limpiar la sesión
         return $this->redirect(['action' => 'index']);
     }
 }

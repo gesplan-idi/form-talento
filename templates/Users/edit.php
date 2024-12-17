@@ -33,6 +33,7 @@
                     echo $this->Form->control('profesion');
                     echo $this->Form->control('puesto');
                     echo $this->Form->control('email');
+                    echo $this->Form->control('password');
                     echo $this->Form->control('nacionalidad');
                     echo $this->Form->control('foto');
                     echo $this->Form->control('discapacidad');

@@ -19,7 +19,7 @@ class UsersFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 'c31075b3-6733-494a-b218-c88a29fd6d5f',
+                'id' => '9e9bffd7-f84f-4e38-bab4-4a5e5f7ab593',
                 'dni' => 'Lorem i',
                 'nombre' => 'Lorem ipsum dolor sit amet',
                 'apellidos' => 'Lorem ipsum dolor sit amet',
@@ -27,6 +27,7 @@ class UsersFixture extends TestFixture
                 'profesion' => 'Lorem ipsum dolor sit amet',
                 'puesto' => 'Lorem ipsum dolor sit amet',
                 'email' => 'Lorem ipsum dolor sit amet',
+                'password' => 'Lorem ipsum dolor sit amet',
                 'nacionalidad' => 'Lorem ipsum dolor sit amet',
                 'foto' => 'Lorem ipsum dolor sit amet',
                 'discapacidad' => 1,

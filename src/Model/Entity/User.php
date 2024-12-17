@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property string|null $profesion
  * @property string|null $puesto
  * @property string $email
+ * @property string $password
  * @property string|null $nacionalidad
  * @property string|null $foto
  * @property bool|null $discapacidad
@@ -57,6 +58,7 @@ class User extends Entity
         'profesion' => true,
         'puesto' => true,
         'email' => true,
+        'password' => true,
         'nacionalidad' => true,
         'foto' => true,
         'discapacidad' => true,
@@ -77,5 +79,14 @@ class User extends Entity
         'experiences' => true,
         'languages' => true,
         'skills' => true,
+    ];
+
+    /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array<string>
+     */
+    protected $_hidden = [
+        'password',
     ];
 }
