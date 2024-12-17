@@ -21,7 +21,12 @@ class UsersController extends AppController
         $this->paginate = [
             'contain' => ['Departments', 'Categories', 'Contracts', 'Workplaces'],
         ];
-        $users = $this->paginate($this->Users);
+        $id = $this->request->getAttribute('user_id');
+        if ($id) {
+            $users = $this->paginate($this->Users->find('all')->where(['Users.id' => $id]));
+        } else {
+            $users = $this->paginate($this->Users);
+        }
 
         $this->set(compact('users'));
     }

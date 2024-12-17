@@ -35,8 +35,9 @@ $this->disableAutoLayout();
                     <div class="column">
                         <h3>Accede a las siguientes secciones:</h3>
                         <ul>
-                            <li><a href="<?= $this->Url->build(['controller' => 'SkillCategories', 'action' => 'index']); ?>">Categorías de habilidades</a></li>
                             <li><a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'index']); ?>">Usuarios</a></li>
+                            <li><a href="<?= $this->Url->build(['controller' => 'Languages', 'action' => 'index']); ?>">Idiomas</a></li>
+                            <li><a href="<?= $this->Url->build(['controller' => 'SkillCategories', 'action' => 'index']); ?>">Categorías de habilidades</a></li>
                             <!-- Agrega más enlaces según las secciones de tu aplicación -->
                         </ul>
                     </div>
