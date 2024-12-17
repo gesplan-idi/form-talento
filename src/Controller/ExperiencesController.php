@@ -19,9 +19,14 @@ class ExperiencesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'ExperienceTypes'],
         ];
-        $experiences = $this->paginate($this->Experiences);
+        $id = $this->request->getAttribute('user_id');
+        if ($id) {
+            $experiences = $this->paginate($this->Experiences->find('all')->where(['Experiences.user_id' => $id]));
+        } else {
+            $experiences = $this->paginate($this->Experiences);
+        }
 
         $this->set(compact('experiences'));
     }

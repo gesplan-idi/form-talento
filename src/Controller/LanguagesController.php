@@ -21,7 +21,12 @@ class LanguagesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'LanguageLevels'],
         ];
-        $languages = $this->paginate($this->Languages);
+        $id = $this->request->getAttribute('user_id');
+        if ($id) {
+            $languages = $this->paginate($this->Languages->find('all')->where(['Languages.user_id' => $id]));
+        } else {
+            $languages = $this->paginate($this->Languages);
+        }
 
         $this->set(compact('languages'));
     }

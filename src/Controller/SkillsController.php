@@ -21,7 +21,12 @@ class SkillsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'SkillCategories'],
         ];
-        $skills = $this->paginate($this->Skills);
+        $id = $this->request->getAttribute('user_id');
+        if ($id) {
+            $skills = $this->paginate($this->Skills->find('all')->where(['Skills.user_id' => $id]));
+        } else {
+            $skills = $this->paginate($this->Skills);
+        }
 
         $this->set(compact('skills'));
     }
