@@ -22,7 +22,8 @@
                 <legend><?= __('Add User') ?></legend>
                 <?php
                     echo $this->Form->control('dni');
-                    echo $this->Form->control('nombre_apellidos');
+                    echo $this->Form->control('nombre');
+                    echo $this->Form->control('apellidos');
                     echo $this->Form->control('fecha_nacimiento');
                     echo $this->Form->control('profesion');
                     echo $this->Form->control('puesto');

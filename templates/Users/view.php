@@ -27,8 +27,12 @@
                     <td><?= h($user->dni) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Nombre Apellidos') ?></th>
-                    <td><?= h($user->nombre_apellidos) ?></td>
+                    <th><?= __('Nombre') ?></th>
+                    <td><?= h($user->nombre) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Apellidos') ?></th>
+                    <td><?= h($user->apellidos) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Profesion') ?></th>

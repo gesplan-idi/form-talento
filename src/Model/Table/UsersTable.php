@@ -96,10 +96,16 @@ class UsersTable extends Table
             ->add('dni', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('nombre_apellidos')
-            ->maxLength('nombre_apellidos', 255)
-            ->requirePresence('nombre_apellidos', 'create')
-            ->notEmptyString('nombre_apellidos');
+            ->scalar('nombre')
+            ->maxLength('nombre', 255)
+            ->requirePresence('nombre', 'create')
+            ->notEmptyString('nombre');
+
+        $validator
+            ->scalar('apellidos')
+            ->maxLength('apellidos', 255)
+            ->requirePresence('apellidos', 'create')
+            ->notEmptyString('apellidos');
 
         $validator
             ->date('fecha_nacimiento')

@@ -13,7 +13,8 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('dni') ?></th>
-                    <th><?= $this->Paginator->sort('nombre_apellidos') ?></th>
+                    <th><?= $this->Paginator->sort('nombre') ?></th>
+                    <th><?= $this->Paginator->sort('apellidos') ?></th>
                     <th><?= $this->Paginator->sort('fecha_nacimiento') ?></th>
                     <th><?= $this->Paginator->sort('profesion') ?></th>
                     <th><?= $this->Paginator->sort('puesto') ?></th>
@@ -37,7 +38,8 @@
                 <tr>
                     <td><?= h($user->id) ?></td>
                     <td><?= h($user->dni) ?></td>
-                    <td><?= h($user->nombre_apellidos) ?></td>
+                    <td><?= h($user->nombre) ?></td>
+                    <td><?= h($user->apellidos) ?></td>
                     <td><?= h($user->fecha_nacimiento) ?></td>
                     <td><?= h($user->profesion) ?></td>
                     <td><?= h($user->puesto) ?></td>
