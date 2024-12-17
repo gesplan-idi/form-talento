@@ -46,6 +46,10 @@ class ExperiencesTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
+        $this->belongsTo('ExperienceTypes', [
+            'foreignKey' => 'tipo_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**
@@ -59,11 +63,6 @@ class ExperiencesTable extends Table
         $validator
             ->uuid('user_id')
             ->allowEmptyString('user_id');
-
-        $validator
-            ->scalar('tipo')
-            ->requirePresence('tipo', 'create')
-            ->notEmptyString('tipo');
 
         $validator
             ->scalar('nombre_empresa')
@@ -100,6 +99,10 @@ class ExperiencesTable extends Table
             ->scalar('trabajos')
             ->allowEmptyString('trabajos');
 
+        $validator
+            ->integer('tipo_id')
+            ->notEmptyString('tipo_id');
+
         return $validator;
     }
 
@@ -113,6 +116,7 @@ class ExperiencesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn('tipo_id', 'ExperienceTypes'), ['errorField' => 'tipo_id']);
 
         return $rules;
     }

@@ -10,7 +10,6 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string|null $user_id
- * @property string $tipo
  * @property string|null $nombre_empresa
  * @property string|null $nombre_proyecto
  * @property string|null $cargo
@@ -19,6 +18,7 @@ use Cake\ORM\Entity;
  * @property string|null $responsabilidades
  * @property string|null $logros
  * @property string|null $trabajos
+ * @property int $tipo_id
  *
  * @property \App\Model\Entity\User $user
  */
@@ -35,7 +35,6 @@ class Experience extends Entity
      */
     protected $_accessible = [
         'user_id' => true,
-        'tipo' => true,
         'nombre_empresa' => true,
         'nombre_proyecto' => true,
         'cargo' => true,
@@ -44,6 +43,7 @@ class Experience extends Entity
         'responsabilidades' => true,
         'logros' => true,
         'trabajos' => true,
+        'tipo_id' => true,
         'user' => true,
     ];
 }

@@ -24,7 +24,6 @@
                 <legend><?= __('Edit Experience') ?></legend>
                 <?php
                     echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
-                    echo $this->Form->control('tipo');
                     echo $this->Form->control('nombre_empresa');
                     echo $this->Form->control('nombre_proyecto');
                     echo $this->Form->control('cargo');
@@ -33,6 +32,7 @@
                     echo $this->Form->control('responsabilidades');
                     echo $this->Form->control('logros');
                     echo $this->Form->control('trabajos');
+                    echo $this->Form->control('tipo_id');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

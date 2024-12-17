@@ -23,10 +23,6 @@
                     <td><?= $experience->has('user') ? $this->Html->link($experience->user->dni, ['controller' => 'Users', 'action' => 'view', $experience->user->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Tipo') ?></th>
-                    <td><?= h($experience->tipo) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Nombre Empresa') ?></th>
                     <td><?= h($experience->nombre_empresa) ?></td>
                 </tr>
@@ -41,6 +37,10 @@
                 <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($experience->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Tipo Id') ?></th>
+                    <td><?= $this->Number->format($experience->tipo_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo Inicio') ?></th>
