@@ -18,7 +18,13 @@
             <fieldset>
                 <legend><?= __('Add Aspiration') ?></legend>
                 <?php
-                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
+                    // Si $user_id está definido, usa un campo oculto para pasarlo
+                    if (!empty($user_id)) {
+                        echo $this->Form->hidden('user_id', ['value' => $user_id]);
+                    } else {
+                        // Si no hay $user_id, muestra el selector de usuarios como antes
+                        echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
+                    }
                     echo $this->Form->control('intereses');
                     echo $this->Form->control('posicion_interes');
                     echo $this->Form->control('proyecto_nacional');

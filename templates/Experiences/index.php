@@ -5,7 +5,7 @@
  */
 ?>
 <div class="experiences index content">
-    <?= $this->Html->link(__('New Experience'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('New Experience'), ['action' => 'add', '?' => ['user_id' => $user_id]], ['class' => 'button float-right']) ?>
     <h3><?= __('Experiences') ?></h3>
     <div class="table-responsive">
         <table>

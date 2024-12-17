@@ -21,14 +21,14 @@ class LanguagesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'LanguageLevels'],
         ];
-        $id = $this->request->getAttribute('user_id');
-        if ($id) {
-            $languages = $this->paginate($this->Languages->find('all')->where(['Languages.user_id' => $id]));
+        $user_id = $this->request->getAttribute('user_id');
+        if ($user_id) {
+            $languages = $this->paginate($this->Languages->find('all')->where(['Languages.user_id' => $user_id]));
         } else {
             $languages = $this->paginate($this->Languages);
         }
 
-        $this->set(compact('languages'));
+        $this->set(compact('languages', 'user_id'));
     }
 
     /**
@@ -55,6 +55,13 @@ class LanguagesController extends AppController
     public function add()
     {
         $language = $this->Languages->newEmptyEntity();
+
+        // Obtener el user_id desde la URL
+        $user_id = $this->request->getQuery('user_id');
+        if ($user_id) {
+            $language->user_id = $user_id;
+        }
+
         if ($this->request->is('post')) {
             $language = $this->Languages->patchEntity($language, $this->request->getData());
             if ($this->Languages->save($language)) {

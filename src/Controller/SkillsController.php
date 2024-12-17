@@ -21,14 +21,14 @@ class SkillsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'SkillCategories'],
         ];
-        $id = $this->request->getAttribute('user_id');
-        if ($id) {
-            $skills = $this->paginate($this->Skills->find('all')->where(['Skills.user_id' => $id]));
+        $user_id = $this->request->getAttribute('user_id');
+        if ($user_id) {
+            $skills = $this->paginate($this->Skills->find('all')->where(['Skills.user_id' => $user_id]));
         } else {
             $skills = $this->paginate($this->Skills);
         }
 
-        $this->set(compact('skills'));
+        $this->set(compact('skills', 'user_id'));
     }
 
     /**
@@ -55,6 +55,13 @@ class SkillsController extends AppController
     public function add()
     {
         $skill = $this->Skills->newEmptyEntity();
+
+        // Obtener el user_id desde la URL
+        $user_id = $this->request->getQuery('user_id');
+        if ($user_id) {
+            $skill->user_id = $user_id;
+        }
+
         if ($this->request->is('post')) {
             $skill = $this->Skills->patchEntity($skill, $this->request->getData());
             if ($this->Skills->save($skill)) {
@@ -66,7 +73,7 @@ class SkillsController extends AppController
         }
         $users = $this->Skills->Users->find('list', ['limit' => 200])->all();
         $skillCategories = $this->Skills->SkillCategories->find('list', ['limit' => 200])->all();
-        $this->set(compact('skill', 'users', 'skillCategories'));
+        $this->set(compact('skill', 'users', 'skillCategories', 'user_id'));
     }
 
     /**

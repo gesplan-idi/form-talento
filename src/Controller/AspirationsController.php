@@ -21,14 +21,14 @@ class AspirationsController extends AppController
         $this->paginate = [
             'contain' => ['Users'],
         ];
-        $id = $this->request->getAttribute('user_id');
-        if ($id) {
-            $aspirations = $this->paginate($this->Aspirations->find('all')->where(['Aspirations.user_id' => $id]));
+        $user_id = $this->request->getAttribute('user_id');
+        if ($user_id) {
+            $aspirations = $this->paginate($this->Aspirations->find('all')->where(['Aspirations.user_id' => $user_id]));
         } else {
             $aspirations = $this->paginate($this->Aspirations);
         }
 
-        $this->set(compact('aspirations'));
+        $this->set(compact('aspirations', 'user_id'));
     }
 
     /**
@@ -55,6 +55,13 @@ class AspirationsController extends AppController
     public function add()
     {
         $aspiration = $this->Aspirations->newEmptyEntity();
+
+        // Obtener el user_id desde la URL
+        $user_id = $this->request->getQuery('user_id');
+        if ($user_id) {
+            $aspiration->user_id = $user_id;
+        }
+
         if ($this->request->is('post')) {
             $aspiration = $this->Aspirations->patchEntity($aspiration, $this->request->getData());
             if ($this->Aspirations->save($aspiration)) {
@@ -65,7 +72,7 @@ class AspirationsController extends AppController
             $this->Flash->error(__('The aspiration could not be saved. Please, try again.'));
         }
         $users = $this->Aspirations->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('aspiration', 'users'));
+        $this->set(compact('aspiration', 'users', 'user_id'));
     }
 
     /**
