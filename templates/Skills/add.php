@@ -24,7 +24,7 @@
                         echo $this->Form->hidden('user_id', ['value' => $user_id]);
                     } else {
                         // Si no hay $user_id, muestra el selector de usuarios como antes
-                        echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
+                        echo $this->Form->control('user_id', ['options' => $users, 'empty' => False]);
                     }
                     echo $this->Form->control('skill_category_id', ['options' => $skillCategories, 'empty' => true]);
                     echo $this->Form->control('otros');
