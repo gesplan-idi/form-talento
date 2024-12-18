@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Experience $experience
  * @var string[]|\Cake\Collection\CollectionInterface $users
+ * @var string[]|\Cake\Collection\CollectionInterface $experienceTypes
  */
 ?>
 <div class="row">
@@ -12,7 +13,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $experience->id],
-                ['confirm' => __('Seguro que quieres eliminar # {0}?', $experience->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Are you sure you want to delete # {0}?', $experience->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Experiences'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -32,7 +33,7 @@
                     echo $this->Form->control('responsabilidades');
                     echo $this->Form->control('logros');
                     echo $this->Form->control('trabajos');
-                    echo $this->Form->control('tipo_id');
+                    echo $this->Form->control('tipo_id', ['options' => $experienceTypes]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

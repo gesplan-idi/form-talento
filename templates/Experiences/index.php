@@ -5,7 +5,7 @@
  */
 ?>
 <div class="experiences index content">
-    <?= $this->Html->link(__('New Experience'), ['action' => 'add', '?' => ['user_id' => $user_id]], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('New Experience'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Experiences') ?></h3>
     <div class="table-responsive">
         <table>
@@ -32,7 +32,7 @@
                     <td><?= h($experience->cargo) ?></td>
                     <td><?= h($experience->periodo_inicio) ?></td>
                     <td><?= h($experience->periodo_fin) ?></td>
-                    <td><?= $this->Number->format($experience->tipo_id) ?></td>
+                    <td><?= $experience->has('experience_type') ? $this->Html->link($experience->experience_type->nombre, ['controller' => 'ExperienceTypes', 'action' => 'view', $experience->experience_type->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $experience->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $experience->id]) ?>

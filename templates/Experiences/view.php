@@ -35,12 +35,12 @@
                     <td><?= h($experience->cargo) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($experience->id) ?></td>
+                    <th><?= __('Experience Type') ?></th>
+                    <td><?= $experience->has('experience_type') ? $this->Html->link($experience->experience_type->nombre, ['controller' => 'ExperienceTypes', 'action' => 'view', $experience->experience_type->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Tipo Id') ?></th>
-                    <td><?= $this->Number->format($experience->tipo_id) ?></td>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($experience->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo Inicio') ?></th>

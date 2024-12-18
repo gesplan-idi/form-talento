@@ -21,14 +21,9 @@ class ExperiencesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'ExperienceTypes'],
         ];
-        $user_id = $this->request->getAttribute('user_id');
-        if ($user_id) {
-            $experiences = $this->paginate($this->Experiences->find('all')->where(['Experiences.user_id' => $user_id]));
-        } else {
-            $experiences = $this->paginate($this->Experiences);
-        }
+        $experiences = $this->paginate($this->Experiences);
 
-        $this->set(compact('experiences', 'user_id'));
+        $this->set(compact('experiences'));
     }
 
     /**
@@ -41,7 +36,7 @@ class ExperiencesController extends AppController
     public function view($id = null)
     {
         $experience = $this->Experiences->get($id, [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'ExperienceTypes'],
         ]);
 
         $this->set(compact('experience'));
@@ -55,13 +50,6 @@ class ExperiencesController extends AppController
     public function add()
     {
         $experience = $this->Experiences->newEmptyEntity();
-
-        // Obtener el user_id desde la URL
-        $user_id = $this->request->getQuery('user_id');
-        if ($user_id) {
-            $experience->user_id = $user_id;
-        }
-
         if ($this->request->is('post')) {
             $experience = $this->Experiences->patchEntity($experience, $this->request->getData());
             if ($this->Experiences->save($experience)) {
@@ -72,7 +60,8 @@ class ExperiencesController extends AppController
             $this->Flash->error(__('The experience could not be saved. Please, try again.'));
         }
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users', 'user_id'));
+        $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
+        $this->set(compact('experience', 'users', 'experienceTypes'));
     }
 
     /**
@@ -97,7 +86,8 @@ class ExperiencesController extends AppController
             $this->Flash->error(__('The experience could not be saved. Please, try again.'));
         }
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users'));
+        $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
+        $this->set(compact('experience', 'users', 'experienceTypes'));
     }
 
     /**

@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * Experiences Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\ExperienceTypesTable&\Cake\ORM\Association\BelongsTo $ExperienceTypes
  *
  * @method \App\Model\Entity\Experience newEmptyEntity()
  * @method \App\Model\Entity\Experience newEntity(array $data, array $options = [])

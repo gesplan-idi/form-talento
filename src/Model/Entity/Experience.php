@@ -21,6 +21,7 @@ use Cake\ORM\Entity;
  * @property int $tipo_id
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\ExperienceType $experience_type
  */
 class Experience extends Entity
 {
@@ -45,5 +46,6 @@ class Experience extends Entity
         'trabajos' => true,
         'tipo_id' => true,
         'user' => true,
+        'experience_type' => true,
     ];
 }
