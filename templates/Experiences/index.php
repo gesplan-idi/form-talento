@@ -5,8 +5,8 @@
  */
 ?>
 <div class="experiences index content">
-    <?= $this->Html->link(__('New Experience'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Experiences') ?></h3>
+    <?= $this->Html->link(__('Nueva experiencia'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Experiencias') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -19,7 +19,7 @@
                     <th><?= $this->Paginator->sort('periodo_inicio') ?></th>
                     <th><?= $this->Paginator->sort('periodo_fin') ?></th>
                     <th><?= $this->Paginator->sort('tipo_id') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions"><?= __('Acciones') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -46,9 +46,9 @@
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('siguiente') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>

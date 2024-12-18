@@ -27,7 +27,11 @@
                     echo $this->Form->control('fecha_nacimiento');
                     echo $this->Form->control('profesion');
                     echo $this->Form->control('puesto');
-                    echo $this->Form->control('email');
+                    if (isset($email)) {
+                        echo $this->Form->hidden('email', ['value' => $email]);
+                    } else {
+                        echo $this->Form->control('email');
+                    }
                     echo $this->Form->control('nacionalidad');
                     echo $this->Form->control('foto');
                     echo $this->Form->control('discapacidad');

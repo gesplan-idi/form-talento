@@ -24,7 +24,7 @@
             <fieldset>
                 <legend><?= __('Editar estudio') ?></legend>
                 <?php
-                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true, 'readonly' => true]);
+                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true, 'disabled' => true]);
                     echo $this->Form->control('nombre_titulacion');
                     echo $this->Form->control('ano_finalizacion');
                     echo $this->Form->control('institucion');

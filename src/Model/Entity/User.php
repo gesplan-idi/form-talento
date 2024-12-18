@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property string $id
  * @property string $dni
  * @property string $nombre
+ * @property string $role
+ * @property string $password
  * @property string $apellidos
  * @property \Cake\I18n\FrozenDate $fecha_nacimiento
  * @property string|null $profesion
@@ -51,6 +53,8 @@ class User extends Entity
      */
     protected $_accessible = [
         'dni' => true,
+        'role' => false,
+        'password' => false,
         'nombre' => true,
         'apellidos' => true,
         'fecha_nacimiento' => true,
@@ -77,5 +81,9 @@ class User extends Entity
         'experiences' => true,
         'languages' => true,
         'skills' => true,
+    ];
+
+    protected $_hidden = [
+        'password',
     ];
 }
