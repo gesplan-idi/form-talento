@@ -73,7 +73,7 @@ class LanguagesController extends AppController
         }
         $users = $this->Languages->Users->find('list', ['limit' => 200])->all();
         $languageLevels = $this->Languages->LanguageLevels->find('list', ['limit' => 200])->all();
-        $this->set(compact('language', 'users', 'languageLevels'));
+        $this->set(compact('language', 'users', 'languageLevels', 'user_id'));
     }
 
     /**

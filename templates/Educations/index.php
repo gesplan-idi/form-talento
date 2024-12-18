@@ -5,8 +5,8 @@
  */
 ?>
 <div class="educations index content">
-    <?= $this->Html->link(__('New Education'), ['action' => 'add', '?' => ['user_id' => $user_id]], ['class' => 'button float-right']) ?>
-    <h3><?= __('Educations') ?></h3>
+    <?= $this->Html->link(__('Añadir estudio'), ['action' => 'add', '?' => ['user_id' => $user_id]], ['class' => 'button float-right']) ?>
+    <h3><?= __('Estudios') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -17,7 +17,7 @@
                     <th><?= $this->Paginator->sort('ano_finalizacion') ?></th>
                     <th><?= $this->Paginator->sort('institucion') ?></th>
                     <th><?= $this->Paginator->sort('nivel_id') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions"><?= __('Acciones') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,9 +30,9 @@
                     <td><?= h($education->institucion) ?></td>
                     <td><?= $education->has('education_level') ? $this->Html->link($education->education_level->nivel, ['controller' => 'EducationLevels', 'action' => 'view', $education->education_level->id]) : '' ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $education->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $education->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $education->id], ['confirm' => __('Are you sure you want to delete # {0}?', $education->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $education->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $education->id]) ?>
+                        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $education->id], ['confirm' => __('Are you sure you want to delete # {0}?', $education->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -42,9 +42,9 @@
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('siguiente') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>

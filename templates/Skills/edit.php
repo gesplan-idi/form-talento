@@ -13,7 +13,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $skill->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $skill->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Seguro que quieres eliminar # {0}?', $skill->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Skills'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>

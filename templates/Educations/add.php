@@ -9,15 +9,15 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Educations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <h4 class="heading"><?= __('Acciones') ?></h4>
+            <?= $this->Html->link(__('Listar estudios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="educations form content">
             <?= $this->Form->create($education) ?>
             <fieldset>
-                <legend><?= __('Add Education') ?></legend>
+                <legend><?= __('Añadir estudios') ?></legend>
                 <?php
                 // Si $user_id está definido, usa un campo oculto para pasarlo
                 if (!empty($user_id)) {

@@ -8,22 +8,22 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <h4 class="heading"><?= __('Acciones') ?></h4>
             <?= $this->Form->postLink(
-                __('Delete'),
+                __('Eliminar'),
                 ['action' => 'delete', $aspiration->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $aspiration->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Seguro que quieres eliminar # {0}?', $aspiration->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('List Aspirations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Listar aspiraciones'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="aspirations form content">
             <?= $this->Form->create($aspiration) ?>
             <fieldset>
-                <legend><?= __('Edit Aspiration') ?></legend>
+                <legend><?= __('Editar aspiración') ?></legend>
                 <?php
-                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
+                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true, 'readonly' => true]);
                     echo $this->Form->control('intereses');
                     echo $this->Form->control('posicion_interes');
                     echo $this->Form->control('proyecto_nacional');
