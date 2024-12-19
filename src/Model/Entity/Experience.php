@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string|null $user_id
  * @property string|null $nombre_empresa
- * @property string|null $nombre_proyecto
+ * @property string|null $otro_proyecto
  * @property string|null $cargo
  * @property \Cake\I18n\FrozenDate|null $periodo_inicio
  * @property \Cake\I18n\FrozenDate|null $periodo_fin
@@ -19,9 +19,11 @@ use Cake\ORM\Entity;
  * @property string|null $logros
  * @property string|null $trabajos
  * @property int $tipo_id
+ * @property int|null $project_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\ExperienceType $experience_type
+ * @property \App\Model\Entity\Project $project
  */
 class Experience extends Entity
 {
@@ -37,7 +39,7 @@ class Experience extends Entity
     protected $_accessible = [
         'user_id' => true,
         'nombre_empresa' => true,
-        'nombre_proyecto' => true,
+        'otro_proyecto' => true,
         'cargo' => true,
         'periodo_inicio' => true,
         'periodo_fin' => true,
@@ -45,7 +47,9 @@ class Experience extends Entity
         'logros' => true,
         'trabajos' => true,
         'tipo_id' => true,
+        'project_id' => true,
         'user' => true,
         'experience_type' => true,
+        'project' => true,
     ];
 }

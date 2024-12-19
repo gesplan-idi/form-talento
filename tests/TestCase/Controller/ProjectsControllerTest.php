@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\ExperiencesController;
+use App\Controller\ProjectsController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\ExperiencesController Test Case
+ * App\Controller\ProjectsController Test Case
  *
- * @uses \App\Controller\ExperiencesController
+ * @uses \App\Controller\ProjectsController
  */
-class ExperiencesControllerTest extends TestCase
+class ProjectsControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,17 +22,15 @@ class ExperiencesControllerTest extends TestCase
      * @var array<string>
      */
     protected $fixtures = [
-        'app.Experiences',
-        'app.Users',
-        'app.ExperienceTypes',
         'app.Projects',
+        'app.Experiences',
     ];
 
     /**
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\ExperiencesController::index()
+     * @uses \App\Controller\ProjectsController::index()
      */
     public function testIndex(): void
     {
@@ -43,7 +41,7 @@ class ExperiencesControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\ExperiencesController::view()
+     * @uses \App\Controller\ProjectsController::view()
      */
     public function testView(): void
     {
@@ -54,7 +52,7 @@ class ExperiencesControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\ExperiencesController::add()
+     * @uses \App\Controller\ProjectsController::add()
      */
     public function testAdd(): void
     {
@@ -65,7 +63,7 @@ class ExperiencesControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\ExperiencesController::edit()
+     * @uses \App\Controller\ProjectsController::edit()
      */
     public function testEdit(): void
     {
@@ -76,7 +74,7 @@ class ExperiencesControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\ExperiencesController::delete()
+     * @uses \App\Controller\ProjectsController::delete()
      */
     public function testDelete(): void
     {

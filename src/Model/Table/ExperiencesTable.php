@@ -13,6 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ExperienceTypesTable&\Cake\ORM\Association\BelongsTo $ExperienceTypes
+ * @property \App\Model\Table\ProjectsTable&\Cake\ORM\Association\BelongsTo $Projects
  *
  * @method \App\Model\Entity\Experience newEmptyEntity()
  * @method \App\Model\Entity\Experience newEntity(array $data, array $options = [])
@@ -51,6 +52,9 @@ class ExperiencesTable extends Table
             'foreignKey' => 'tipo_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Projects', [
+            'foreignKey' => 'project_id',
+        ]);
     }
 
     /**
@@ -71,9 +75,9 @@ class ExperiencesTable extends Table
             ->allowEmptyString('nombre_empresa');
 
         $validator
-            ->scalar('nombre_proyecto')
-            ->maxLength('nombre_proyecto', 255)
-            ->allowEmptyString('nombre_proyecto');
+            ->scalar('otro_proyecto')
+            ->maxLength('otro_proyecto', 255)
+            ->allowEmptyString('otro_proyecto');
 
         $validator
             ->scalar('cargo')
@@ -104,6 +108,10 @@ class ExperiencesTable extends Table
             ->integer('tipo_id')
             ->notEmptyString('tipo_id');
 
+        $validator
+            ->integer('project_id')
+            ->allowEmptyString('project_id');
+
         return $validator;
     }
 
@@ -118,6 +126,7 @@ class ExperiencesTable extends Table
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
         $rules->add($rules->existsIn('tipo_id', 'ExperienceTypes'), ['errorField' => 'tipo_id']);
+        $rules->add($rules->existsIn('project_id', 'Projects'), ['errorField' => 'project_id']);
 
         return $rules;
     }

@@ -27,6 +27,7 @@ class ExperiencesTableTest extends TestCase
         'app.Experiences',
         'app.Users',
         'app.ExperienceTypes',
+        'app.Projects',
     ];
 
     /**

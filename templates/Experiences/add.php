@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Experience $experience
  * @var \Cake\Collection\CollectionInterface|string[] $users
  * @var \Cake\Collection\CollectionInterface|string[] $experienceTypes
+ * @var \Cake\Collection\CollectionInterface|string[] $projects
  */
 ?>
 <div class="row">
@@ -21,7 +22,7 @@
                 <?php
                     echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
                     echo $this->Form->control('nombre_empresa');
-                    echo $this->Form->control('nombre_proyecto');
+                    echo $this->Form->control('otro_proyecto');
                     echo $this->Form->control('cargo');
                     echo $this->Form->control('periodo_inicio', ['empty' => true]);
                     echo $this->Form->control('periodo_fin', ['empty' => true]);
@@ -29,6 +30,7 @@
                     echo $this->Form->control('logros');
                     echo $this->Form->control('trabajos');
                     echo $this->Form->control('tipo_id', ['options' => $experienceTypes]);
+                    echo $this->Form->control('project_id', ['options' => $projects, 'empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

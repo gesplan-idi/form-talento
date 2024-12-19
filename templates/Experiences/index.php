@@ -5,8 +5,8 @@
  */
 ?>
 <div class="experiences index content">
-    <?= $this->Html->link(__('Nueva experiencia'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Experiencias') ?></h3>
+    <?= $this->Html->link(__('New Experience'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Experiences') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -14,12 +14,13 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
                     <th><?= $this->Paginator->sort('nombre_empresa') ?></th>
-                    <th><?= $this->Paginator->sort('nombre_proyecto') ?></th>
+                    <th><?= $this->Paginator->sort('otro_proyecto') ?></th>
                     <th><?= $this->Paginator->sort('cargo') ?></th>
                     <th><?= $this->Paginator->sort('periodo_inicio') ?></th>
                     <th><?= $this->Paginator->sort('periodo_fin') ?></th>
                     <th><?= $this->Paginator->sort('tipo_id') ?></th>
-                    <th class="actions"><?= __('Acciones') ?></th>
+                    <th><?= $this->Paginator->sort('project_id') ?></th>
+                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,11 +29,12 @@
                     <td><?= $this->Number->format($experience->id) ?></td>
                     <td><?= $experience->has('user') ? $this->Html->link($experience->user->dni, ['controller' => 'Users', 'action' => 'view', $experience->user->id]) : '' ?></td>
                     <td><?= h($experience->nombre_empresa) ?></td>
-                    <td><?= h($experience->nombre_proyecto) ?></td>
+                    <td><?= h($experience->otro_proyecto) ?></td>
                     <td><?= h($experience->cargo) ?></td>
                     <td><?= h($experience->periodo_inicio) ?></td>
                     <td><?= h($experience->periodo_fin) ?></td>
                     <td><?= $experience->has('experience_type') ? $this->Html->link($experience->experience_type->nombre, ['controller' => 'ExperienceTypes', 'action' => 'view', $experience->experience_type->id]) : '' ?></td>
+                    <td><?= $experience->has('project') ? $this->Html->link($experience->project->nombre, ['controller' => 'Projects', 'action' => 'view', $experience->project->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $experience->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $experience->id]) ?>
@@ -46,9 +48,9 @@
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('anterior')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('siguiente') . ' >') ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>

@@ -19,7 +19,7 @@ class ExperiencesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'ExperienceTypes'],
+            'contain' => ['Users', 'ExperienceTypes', 'Projects'],
         ];
         $experiences = $this->paginate($this->Experiences);
 
@@ -36,7 +36,7 @@ class ExperiencesController extends AppController
     public function view($id = null)
     {
         $experience = $this->Experiences->get($id, [
-            'contain' => ['Users', 'ExperienceTypes'],
+            'contain' => ['Users', 'ExperienceTypes', 'Projects'],
         ]);
 
         $this->set(compact('experience'));
@@ -61,7 +61,8 @@ class ExperiencesController extends AppController
         }
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
         $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users', 'experienceTypes'));
+        $projects = $this->Experiences->Projects->find('list', ['limit' => 200])->all();
+        $this->set(compact('experience', 'users', 'experienceTypes', 'projects'));
     }
 
     /**
@@ -87,7 +88,8 @@ class ExperiencesController extends AppController
         }
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
         $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users', 'experienceTypes'));
+        $projects = $this->Experiences->Projects->find('list', ['limit' => 200])->all();
+        $this->set(compact('experience', 'users', 'experienceTypes', 'projects'));
     }
 
     /**
