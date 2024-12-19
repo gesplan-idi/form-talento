@@ -96,6 +96,18 @@ class UsersTable extends Table
             ->add('dni', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
+            ->add(
+                'dni',
+                '_pattern',
+                [
+                    'rule' => function ($checkDni) {
+                        return $this->checkDni($checkDni);
+                    },
+                    'message' => 'El número del dni no es de un documento válido'
+                ]
+            );
+
+        $validator
             ->scalar('nombre')
             ->maxLength('nombre', 255)
             ->requirePresence('nombre', 'create')
@@ -196,5 +208,20 @@ class UsersTable extends Table
         $rules->add($rules->existsIn('workplace_id', 'Workplaces'), ['errorField' => 'workplace_id']);
 
         return $rules;
+    }
+
+    function checkDni($dni): bool
+    {
+        $pattern = '/^[0-9]{8}[A-Z]$/';
+        if (!preg_match($pattern, $dni)) {
+            return false;
+        }
+
+        $numbers = substr($dni, 0, 8);
+        $letter = substr($dni, -1);
+        $validLetters = "TRWAGMYFPDXBNJZSQVHLCKE";
+        $calculatedLetter = $validLetters[$numbers % 23];
+
+        return $letter === $calculatedLetter;
     }
 }
