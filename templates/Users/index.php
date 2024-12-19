@@ -5,13 +5,12 @@
  */
 ?>
 <div class="users index content">
-    <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Users') ?></h3>
+    <?= $this->Html->link(__('Nuevo usuario'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Usuarios') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('dni') ?></th>
                     <th><?= $this->Paginator->sort('nombre') ?></th>
                     <th><?= $this->Paginator->sort('apellidos') ?></th>
@@ -36,7 +35,6 @@
             <tbody>
                 <?php foreach ($users as $user): ?>
                 <tr>
-                    <td><?= h($user->id) ?></td>
                     <td><?= h($user->dni) ?></td>
                     <td><?= h($user->nombre) ?></td>
                     <td><?= h($user->apellidos) ?></td>
