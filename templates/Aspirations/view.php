@@ -27,12 +27,12 @@
                     <td><?= $aspiration->has('disponibility') ? $this->Html->link($aspiration->disponibility->nombre, ['controller' => 'Disponibilities', 'action' => 'view', $aspiration->disponibility->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Isla Destino') ?></th>
-                    <td><?= h($aspiration->isla_destino) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($aspiration->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Island Id') ?></th>
+                    <td><?= $aspiration->island_id === null ? '' : $this->Number->format($aspiration->island_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Posicion Interes Pregunta') ?></th>

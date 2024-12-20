@@ -19,7 +19,7 @@
                     <th><?= $this->Paginator->sort('disponibility_id') ?></th>
                     <th><?= $this->Paginator->sort('disponibilidad_viajar') ?></th>
                     <th><?= $this->Paginator->sort('cambio_isla') ?></th>
-                    <th><?= $this->Paginator->sort('isla_destino') ?></th>
+                    <th><?= $this->Paginator->sort('island_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                     <td><?= $aspiration->has('disponibility') ? $this->Html->link($aspiration->disponibility->nombre, ['controller' => 'Disponibilities', 'action' => 'view', $aspiration->disponibility->id]) : '' ?></td>
                     <td><?= h($aspiration->disponibilidad_viajar) ?></td>
                     <td><?= h($aspiration->cambio_isla) ?></td>
-                    <td><?= h($aspiration->isla_destino) ?></td>
+                    <td><?= $aspiration->island_id === null ? '' : $this->Number->format($aspiration->island_id) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $aspiration->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $aspiration->id]) ?>

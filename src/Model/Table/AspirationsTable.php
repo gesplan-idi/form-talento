@@ -51,6 +51,9 @@ class AspirationsTable extends Table
             'foreignKey' => 'disponibility_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Islands', [
+            'foreignKey' => 'island_id',
+        ]);
     }
 
     /**
@@ -94,9 +97,8 @@ class AspirationsTable extends Table
             ->allowEmptyString('cambio_isla');
 
         $validator
-            ->scalar('isla_destino')
-            ->maxLength('isla_destino', 50)
-            ->allowEmptyString('isla_destino');
+            ->integer('island_id')
+            ->allowEmptyString('island_id');
 
         return $validator;
     }
@@ -112,6 +114,7 @@ class AspirationsTable extends Table
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
         $rules->add($rules->existsIn('disponibility_id', 'Disponibilities'), ['errorField' => 'disponibility_id']);
+        $rules->add($rules->existsIn('island_id', 'Islands'), ['errorField' => 'island_id']);
 
         return $rules;
     }

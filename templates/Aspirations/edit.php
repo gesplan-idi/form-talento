@@ -32,7 +32,7 @@
                     echo $this->Form->control('disponibility_id', ['options' => $disponibilities]);
                     echo $this->Form->control('disponibilidad_viajar');
                     echo $this->Form->control('cambio_isla');
-                    echo $this->Form->control('isla_destino');
+                    echo $this->Form->control('island_id');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

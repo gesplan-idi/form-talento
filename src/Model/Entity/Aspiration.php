@@ -17,7 +17,7 @@ use Cake\ORM\Entity;
  * @property int $disponibility_id
  * @property bool|null $disponibilidad_viajar
  * @property bool|null $cambio_isla
- * @property string|null $isla_destino
+ * @property int|null $island_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Disponibility $disponibility
@@ -42,7 +42,7 @@ class Aspiration extends Entity
         'disponibility_id' => true,
         'disponibilidad_viajar' => true,
         'cambio_isla' => true,
-        'isla_destino' => true,
+        'island_id' => true,
         'user' => true,
         'disponibility' => true,
     ];
