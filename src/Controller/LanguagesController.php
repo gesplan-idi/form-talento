@@ -23,7 +23,7 @@ class LanguagesController extends AppController
         ];
         $user_id = $this->request->getAttribute('user_id');
         if ($user_id) {
-            $languages = $this->paginate($this->Educations->findByUserId($user_id));
+            $languages = $this->paginate($this->Languages->findByUserId($user_id));
         } else {
             $languages = $this->paginate($this->Languages);
         }
