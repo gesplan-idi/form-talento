@@ -21,9 +21,14 @@ class ExperiencesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Projects', 'ExperienceTypes'],
         ];
-        $experiences = $this->paginate($this->Experiences);
+        $user_id = $this->request->getAttribute('user_id');
+        if ($user_id) {
+            $skills = $this->paginate($this->Experiences->findByUserId($user_id));
+        } else {
+            $skills = $this->paginate($this->Experiences);
+        }
 
-        $this->set(compact('experiences'));
+        $this->set(compact('skills', 'user_id'));
     }
 
     /**

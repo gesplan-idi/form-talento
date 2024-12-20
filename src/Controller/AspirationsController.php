@@ -21,9 +21,14 @@ class AspirationsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Disponibilities'],
         ];
-        $aspirations = $this->paginate($this->Aspirations);
+        $user_id = $this->request->getAttribute('user_id');
+        if ($user_id) {
+            $aspirations = $this->paginate($this->Aspirations->findByUserId($user_id));
+        } else {
+            $aspirations = $this->paginate($this->Aspirations);
+        }
 
-        $this->set(compact('aspirations'));
+        $this->set(compact('aspirations', 'user_id'));
     }
 
     /**

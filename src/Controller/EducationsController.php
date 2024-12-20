@@ -21,9 +21,14 @@ class EducationsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'EducationLevels'],
         ];
-        $educations = $this->paginate($this->Educations);
-
-        $this->set(compact('educations'));
+        $user_id = $this->request->getAttribute('user_id');
+        if ($user_id) {
+            $educations = $this->paginate($this->Educations->findByUserId($user_id));
+        } else {
+            $educations = $this->paginate($this->Educations);
+        }
+        // Pasamos user_id y educations a la vista
+        $this->set(compact('educations', 'user_id'));
     }
 
     /**
