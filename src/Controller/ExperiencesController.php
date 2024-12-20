@@ -23,12 +23,12 @@ class ExperiencesController extends AppController
         ];
         $user_id = $this->request->getAttribute('user_id');
         if ($user_id) {
-            $skills = $this->paginate($this->Experiences->findByUserId($user_id));
+            $experiences = $this->paginate($this->Experiences->findByUserId($user_id));
         } else {
-            $skills = $this->paginate($this->Experiences);
+            $experiences = $this->paginate($this->Experiences);
         }
 
-        $this->set(compact('skills', 'user_id'));
+        $this->set(compact('experiences', 'user_id'));
     }
 
     /**

@@ -19,7 +19,13 @@
             <fieldset>
                 <legend><?= __('Add Education') ?></legend>
                 <?php
-                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
+                    // Si $user_id está definido, usa un campo oculto para pasarlo
+                    if (!empty($user_id)) {
+                        echo $this->Form->hidden('user_id', ['value' => $user_id]);
+                    } else {
+                        // Si no hay $user_id, muestra el selector de usuarios como antes
+                        echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
+                    }
                     echo $this->Form->control('nombre_titulacion');
                     echo $this->Form->control('ano_finalizacion');
                     echo $this->Form->control('institucion');
