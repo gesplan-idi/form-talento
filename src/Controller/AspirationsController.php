@@ -66,7 +66,8 @@ class AspirationsController extends AppController
         }
         $users = $this->Aspirations->Users->find('list', ['limit' => 200])->all();
         $disponibilities = $this->Aspirations->Disponibilities->find('list', ['limit' => 200])->all();
-        $this->set(compact('aspiration', 'users', 'disponibilities'));
+        $user_id = $this->request->getQuery('user_id');
+        $this->set(compact('aspiration', 'users', 'disponibilities', 'user_id'));
     }
 
     /**

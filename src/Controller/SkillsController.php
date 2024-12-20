@@ -66,7 +66,8 @@ class SkillsController extends AppController
         }
         $users = $this->Skills->Users->find('list', ['limit' => 200])->all();
         $skillCategories = $this->Skills->SkillCategories->find('list', ['limit' => 200])->all();
-        $this->set(compact('skill', 'users', 'skillCategories'));
+        $user_id = $this->request->getQuery('user_id');
+        $this->set(compact('skill', 'users', 'skillCategories', 'user_id'));
     }
 
     /**

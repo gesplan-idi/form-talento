@@ -66,7 +66,8 @@ class EducationsController extends AppController
         }
         $users = $this->Educations->Users->find('list', ['limit' => 200])->all();
         $educationLevels = $this->Educations->EducationLevels->find('list', ['limit' => 200])->all();
-        $this->set(compact('education', 'users', 'educationLevels'));
+        $user_id = $this->request->getQuery('user_id');
+        $this->set(compact('education', 'users', 'educationLevels', 'user_id'));
     }
 
     /**

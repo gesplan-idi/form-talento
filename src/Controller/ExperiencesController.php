@@ -67,7 +67,8 @@ class ExperiencesController extends AppController
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
         $projects = $this->Experiences->Projects->find('list', ['limit' => 200])->all();
         $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users', 'projects', 'experienceTypes'));
+        $user_id = $this->request->getQuery('user_id');
+        $this->set(compact('experience', 'users', 'projects', 'experienceTypes', 'user_id'));
     }
 
     /**
