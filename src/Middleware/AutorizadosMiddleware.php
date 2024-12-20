@@ -97,7 +97,7 @@ function hasPermission(string $role, string $id, string $url, string $method): b
         ],
         'editor' => [
             [
-                'urls' => ['aspirations', 'categories', 'contracts', 'departments', 'education-levels', 'educations', 'email', 'experiences', 'experience-types', 'language-levels', 'languages', 'skill-categories', 'skills', 'users', 'workplaces'],
+                'urls' => ['aspirations', 'categories', 'contracts', 'departments', 'education-levels', 'educations', 'email', 'experiences', 'experience-types', 'language-levels', 'languages', 'projects', 'skill-categories', 'skills', 'users', 'workplaces'],
                 'methods' => ['GET', 'POST', 'PUT', 'DELETE']
             ],
             [
@@ -111,7 +111,7 @@ function hasPermission(string $role, string $id, string $url, string $method): b
                 'methods' => ['GET', 'POST', 'PUT', 'DELETE']
             ],
             [
-                'urls' => [ 'categories', 'contracts', 'departments', 'education-levels', 'email', 'experience-types', 'language-levels', 'skill-categories', 'users', 'workplaces'],
+                'urls' => [ 'categories', 'contracts', 'departments', 'education-levels', 'email', 'experience-types', 'language-levels', 'projects', 'skill-categories', 'users', 'workplaces'],
                 'methods' => ['GET']
             ],
             [

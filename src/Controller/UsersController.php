@@ -55,6 +55,7 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEmptyEntity();
+        $email = $this->request->getAttribute('email');
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -71,7 +72,7 @@ class UsersController extends AppController
         $categories = $this->Users->Categories->find('list', ['limit' => 200])->all();
         $contracts = $this->Users->Contracts->find('list', ['limit' => 200])->all();
         $workplaces = $this->Users->Workplaces->find('list', ['limit' => 200])->all();
-        $this->set(compact('user', 'positions', 'professions', 'nationalities', 'departments', 'categories', 'contracts', 'workplaces'));
+        $this->set(compact('user', 'positions', 'professions', 'nationalities', 'departments', 'categories', 'contracts', 'workplaces', 'email'));
     }
 
     /**
