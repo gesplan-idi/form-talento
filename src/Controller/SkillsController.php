@@ -23,7 +23,7 @@ class SkillsController extends AppController
         ];
         $user_id = $this->request->getAttribute('user_id');
         if ($user_id) {
-            $skills = $this->paginate($this->Educations->findByUserId($user_id));
+            $skills = $this->paginate($this->Skills->findByUserId($user_id));
         } else {
             $skills = $this->paginate($this->Skills);
         }
