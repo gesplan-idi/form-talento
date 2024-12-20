@@ -23,12 +23,16 @@
                     <td><?= $experience->has('user') ? $this->Html->link($experience->user->dni, ['controller' => 'Users', 'action' => 'view', $experience->user->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Nombre Empresa') ?></th>
-                    <td><?= h($experience->nombre_empresa) ?></td>
+                    <th><?= __('Project') ?></th>
+                    <td><?= $experience->has('project') ? $this->Html->link($experience->project->nombre, ['controller' => 'Projects', 'action' => 'view', $experience->project->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Otro Proyecto') ?></th>
                     <td><?= h($experience->otro_proyecto) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Nombre Empresa') ?></th>
+                    <td><?= h($experience->nombre_empresa) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cargo') ?></th>
@@ -37,10 +41,6 @@
                 <tr>
                     <th><?= __('Experience Type') ?></th>
                     <td><?= $experience->has('experience_type') ? $this->Html->link($experience->experience_type->nombre, ['controller' => 'ExperienceTypes', 'action' => 'view', $experience->experience_type->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Project') ?></th>
-                    <td><?= $experience->has('project') ? $this->Html->link($experience->project->nombre, ['controller' => 'Projects', 'action' => 'view', $experience->project->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

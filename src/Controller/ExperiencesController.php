@@ -19,7 +19,7 @@ class ExperiencesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'ExperienceTypes', 'Projects'],
+            'contain' => ['Users', 'Projects', 'ExperienceTypes'],
         ];
         $experiences = $this->paginate($this->Experiences);
 
@@ -36,7 +36,7 @@ class ExperiencesController extends AppController
     public function view($id = null)
     {
         $experience = $this->Experiences->get($id, [
-            'contain' => ['Users', 'ExperienceTypes', 'Projects'],
+            'contain' => ['Users', 'Projects', 'ExperienceTypes'],
         ]);
 
         $this->set(compact('experience'));
@@ -60,9 +60,9 @@ class ExperiencesController extends AppController
             $this->Flash->error(__('The experience could not be saved. Please, try again.'));
         }
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
-        $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
         $projects = $this->Experiences->Projects->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users', 'experienceTypes', 'projects'));
+        $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
+        $this->set(compact('experience', 'users', 'projects', 'experienceTypes'));
     }
 
     /**
@@ -87,9 +87,9 @@ class ExperiencesController extends AppController
             $this->Flash->error(__('The experience could not be saved. Please, try again.'));
         }
         $users = $this->Experiences->Users->find('list', ['limit' => 200])->all();
-        $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
         $projects = $this->Experiences->Projects->find('list', ['limit' => 200])->all();
-        $this->set(compact('experience', 'users', 'experienceTypes', 'projects'));
+        $experienceTypes = $this->Experiences->ExperienceTypes->find('list', ['limit' => 200])->all();
+        $this->set(compact('experience', 'users', 'projects', 'experienceTypes'));
     }
 
     /**

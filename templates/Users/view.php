@@ -23,6 +23,10 @@
                     <td><?= h($user->id) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Role') ?></th>
+                    <td><?= h($user->role) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Dni') ?></th>
                     <td><?= h($user->dni) ?></td>
                 </tr>
@@ -35,20 +39,28 @@
                     <td><?= h($user->apellidos) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Profesion') ?></th>
-                    <td><?= h($user->profesion) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Puesto') ?></th>
-                    <td><?= h($user->puesto) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Email') ?></th>
                     <td><?= h($user->email) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Nacionalidad') ?></th>
-                    <td><?= h($user->nacionalidad) ?></td>
+                    <th><?= __('Position') ?></th>
+                    <td><?= $user->has('position') ? $this->Html->link($user->position->nombre, ['controller' => 'Positions', 'action' => 'view', $user->position->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Puesto Otro') ?></th>
+                    <td><?= h($user->puesto_otro) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Profession') ?></th>
+                    <td><?= $user->has('profession') ? $this->Html->link($user->profession->nombre, ['controller' => 'Professions', 'action' => 'view', $user->profession->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Profesion Id Otro') ?></th>
+                    <td><?= h($user->profesion_id_otro) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Nationality') ?></th>
+                    <td><?= $user->has('nationality') ? $this->Html->link($user->nationality->nombre, ['controller' => 'Nationalities', 'action' => 'view', $user->nationality->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Foto') ?></th>
@@ -71,16 +83,16 @@
                     <td><?= $user->has('workplace') ? $this->Html->link($user->workplace->nombre, ['controller' => 'Workplaces', 'action' => 'view', $user->workplace->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Disponibilidad Traslado') ?></th>
-                    <td><?= h($user->disponibilidad_traslado) ?></td>
+                    <th><?= __('Observ Disp Traslado') ?></th>
+                    <td><?= h($user->observ_disp_traslado) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Experiencia Gesplan') ?></th>
-                    <td><?= $this->Number->format($user->experiencia_gesplan) ?></td>
+                    <td><?= $user->experiencia_gesplan === null ? '' : $this->Number->format($user->experiencia_gesplan) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Experiencia Total') ?></th>
-                    <td><?= $this->Number->format($user->experiencia_total) ?></td>
+                    <td><?= $user->experiencia_total === null ? '' : $this->Number->format($user->experiencia_total) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Fecha Nacimiento') ?></th>
@@ -89,6 +101,10 @@
                 <tr>
                     <th><?= __('Discapacidad') ?></th>
                     <td><?= $user->discapacidad ? __('Yes') : __('No'); ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Disponibilidad Traslado') ?></th>
+                    <td><?= $user->disponibilidad_traslado ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Formulario Aceptado') ?></th>
@@ -104,10 +120,10 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
                             <th><?= __('Intereses') ?></th>
-                            <th><?= __('Posicion Interes') ?></th>
+                            <th><?= __('Posicion Interes Pregunta') ?></th>
                             <th><?= __('Proyecto Nacional') ?></th>
                             <th><?= __('Proyecto Internacional') ?></th>
-                            <th><?= __('Disponibilidad Retos') ?></th>
+                            <th><?= __('Disponibility Id') ?></th>
                             <th><?= __('Disponibilidad Viajar') ?></th>
                             <th><?= __('Cambio Isla') ?></th>
                             <th><?= __('Isla Destino') ?></th>
@@ -118,10 +134,10 @@
                             <td><?= h($aspirations->id) ?></td>
                             <td><?= h($aspirations->user_id) ?></td>
                             <td><?= h($aspirations->intereses) ?></td>
-                            <td><?= h($aspirations->posicion_interes) ?></td>
+                            <td><?= h($aspirations->posicion_interes_pregunta) ?></td>
                             <td><?= h($aspirations->proyecto_nacional) ?></td>
                             <td><?= h($aspirations->proyecto_internacional) ?></td>
-                            <td><?= h($aspirations->disponibilidad_retos) ?></td>
+                            <td><?= h($aspirations->disponibility_id) ?></td>
                             <td><?= h($aspirations->disponibilidad_viajar) ?></td>
                             <td><?= h($aspirations->cambio_isla) ?></td>
                             <td><?= h($aspirations->isla_destino) ?></td>
@@ -177,30 +193,32 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
-                            <th><?= __('Tipo') ?></th>
+                            <th><?= __('Project Id') ?></th>
+                            <th><?= __('Otro Proyecto') ?></th>
                             <th><?= __('Nombre Empresa') ?></th>
-                            <th><?= __('Nombre Proyecto') ?></th>
                             <th><?= __('Cargo') ?></th>
                             <th><?= __('Periodo Inicio') ?></th>
                             <th><?= __('Periodo Fin') ?></th>
                             <th><?= __('Responsabilidades') ?></th>
                             <th><?= __('Logros') ?></th>
                             <th><?= __('Trabajos') ?></th>
+                            <th><?= __('Tipo Id') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($user->experiences as $experiences) : ?>
                         <tr>
                             <td><?= h($experiences->id) ?></td>
                             <td><?= h($experiences->user_id) ?></td>
-                            <td><?= h($experiences->tipo) ?></td>
+                            <td><?= h($experiences->project_id) ?></td>
+                            <td><?= h($experiences->otro_proyecto) ?></td>
                             <td><?= h($experiences->nombre_empresa) ?></td>
-                            <td><?= h($experiences->nombre_proyecto) ?></td>
                             <td><?= h($experiences->cargo) ?></td>
                             <td><?= h($experiences->periodo_inicio) ?></td>
                             <td><?= h($experiences->periodo_fin) ?></td>
                             <td><?= h($experiences->responsabilidades) ?></td>
                             <td><?= h($experiences->logros) ?></td>
                             <td><?= h($experiences->trabajos) ?></td>
+                            <td><?= h($experiences->tipo_id) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Experiences', 'action' => 'view', $experiences->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Experiences', 'action' => 'edit', $experiences->id]) ?>
@@ -220,7 +238,7 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
-                            <th><?= __('Idioma') ?></th>
+                            <th><?= __('Option Id') ?></th>
                             <th><?= __('Certificado') ?></th>
                             <th><?= __('Institucion') ?></th>
                             <th><?= __('Nivel Id') ?></th>
@@ -230,7 +248,7 @@
                         <tr>
                             <td><?= h($languages->id) ?></td>
                             <td><?= h($languages->user_id) ?></td>
-                            <td><?= h($languages->idioma) ?></td>
+                            <td><?= h($languages->option_id) ?></td>
                             <td><?= h($languages->certificado) ?></td>
                             <td><?= h($languages->institucion) ?></td>
                             <td><?= h($languages->nivel_id) ?></td>

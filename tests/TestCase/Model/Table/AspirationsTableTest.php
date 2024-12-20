@@ -26,6 +26,7 @@ class AspirationsTableTest extends TestCase
     protected $fixtures = [
         'app.Aspirations',
         'app.Users',
+        'app.Disponibilities',
     ];
 
     /**

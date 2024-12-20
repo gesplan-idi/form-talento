@@ -21,17 +21,10 @@ class EducationsController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'EducationLevels'],
         ];
-        $user_id = $this->request->getAttribute('user_id');
-        if ($user_id) {
-            $educations = $this->paginate($this->Educations->find('all')->where(['Educations.user_id' => $user_id]));
-        } else {
-            $educations = $this->paginate($this->Educations);
-        }
-        // Pasamos user_id y educations a la vista
-        $this->set(compact('educations', 'user_id'));
+        $educations = $this->paginate($this->Educations);
+
+        $this->set(compact('educations'));
     }
-
-
 
     /**
      * View method
@@ -54,32 +47,22 @@ class EducationsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
+    public function add()
+    {
+        $education = $this->Educations->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $education = $this->Educations->patchEntity($education, $this->request->getData());
+            if ($this->Educations->save($education)) {
+                $this->Flash->success(__('The education has been saved.'));
 
-     public function add()
-     {
-         $education = $this->Educations->newEmptyEntity();
-     
-         // Obtener el user_id desde la URL
-         $user_id = $this->request->getQuery('user_id');
-         if ($user_id) {
-             $education->user_id = $user_id;
-         }
-     
-         if ($this->request->is('post')) {
-             $education = $this->Educations->patchEntity($education, $this->request->getData());
-             if ($this->Educations->save($education)) {
-                 $this->Flash->success(__('The education has been saved.'));
-     
-                 return $this->redirect(['action' => 'index']);
-             }
-             $this->Flash->error(__('The education could not be saved. Please, try again.'));
-         }
-     
-         // Pasar datos a la vista
-         $users = $this->Educations->Users->find('list', ['limit' => 200])->all();
-         $educationLevels = $this->Educations->EducationLevels->find('list', ['limit' => 200])->all();
-         $this->set(compact('education', 'users', 'educationLevels', 'user_id')); // Pasar user_id a la vista
-     }
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The education could not be saved. Please, try again.'));
+        }
+        $users = $this->Educations->Users->find('list', ['limit' => 200])->all();
+        $educationLevels = $this->Educations->EducationLevels->find('list', ['limit' => 200])->all();
+        $this->set(compact('education', 'users', 'educationLevels'));
+    }
 
     /**
      * Edit method

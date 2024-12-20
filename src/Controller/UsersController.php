@@ -19,14 +19,9 @@ class UsersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Departments', 'Categories', 'Contracts', 'Workplaces'],
+            'contain' => ['Positions', 'Professions', 'Nationalities', 'Departments', 'Categories', 'Contracts', 'Workplaces'],
         ];
-        $id = $this->request->getAttribute('user_id');
-        if ($id) {
-            $users = $this->paginate($this->Users->find('all')->where(['Users.id' => $id]));
-        } else {
-            $users = $this->paginate($this->Users);
-        }
+        $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
     }
@@ -41,7 +36,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Departments', 'Categories', 'Contracts', 'Workplaces', 'Aspirations', 'Educations', 'Experiences', 'Languages', 'Skills'],
+            'contain' => ['Positions', 'Professions', 'Nationalities', 'Departments', 'Categories', 'Contracts', 'Workplaces', 'Aspirations', 'Educations', 'Experiences', 'Languages', 'Skills'],
         ]);
 
         $this->set(compact('user'));
@@ -55,7 +50,6 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEmptyEntity();
-        $email = $this->request->getAttribute('email');
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -65,11 +59,14 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+        $positions = $this->Users->Positions->find('list', ['limit' => 200])->all();
+        $professions = $this->Users->Professions->find('list', ['limit' => 200])->all();
+        $nationalities = $this->Users->Nationalities->find('list', ['limit' => 200])->all();
         $departments = $this->Users->Departments->find('list', ['limit' => 200])->all();
         $categories = $this->Users->Categories->find('list', ['limit' => 200])->all();
         $contracts = $this->Users->Contracts->find('list', ['limit' => 200])->all();
         $workplaces = $this->Users->Workplaces->find('list', ['limit' => 200])->all();
-        $this->set(compact('user', 'departments', 'categories', 'contracts', 'workplaces', 'email'));
+        $this->set(compact('user', 'positions', 'professions', 'nationalities', 'departments', 'categories', 'contracts', 'workplaces'));
     }
 
     /**
@@ -93,11 +90,14 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+        $positions = $this->Users->Positions->find('list', ['limit' => 200])->all();
+        $professions = $this->Users->Professions->find('list', ['limit' => 200])->all();
+        $nationalities = $this->Users->Nationalities->find('list', ['limit' => 200])->all();
         $departments = $this->Users->Departments->find('list', ['limit' => 200])->all();
         $categories = $this->Users->Categories->find('list', ['limit' => 200])->all();
         $contracts = $this->Users->Contracts->find('list', ['limit' => 200])->all();
         $workplaces = $this->Users->Workplaces->find('list', ['limit' => 200])->all();
-        $this->set(compact('user', 'departments', 'categories', 'contracts', 'workplaces'));
+        $this->set(compact('user', 'positions', 'professions', 'nationalities', 'departments', 'categories', 'contracts', 'workplaces'));
     }
 
     /**

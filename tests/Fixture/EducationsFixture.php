@@ -20,7 +20,7 @@ class EducationsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'user_id' => '7697337a-e188-4152-ab7d-bf5eb55ccef0',
+                'user_id' => '0a455f43-0074-41f5-9853-70b540cb2c84',
                 'nombre_titulacion' => 'Lorem ipsum dolor sit amet',
                 'ano_finalizacion' => 1,
                 'institucion' => 'Lorem ipsum dolor sit amet',

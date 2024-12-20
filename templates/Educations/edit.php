@@ -11,27 +11,27 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
-                __('Eliminar estudio'),
+                __('Delete'),
                 ['action' => 'delete', $education->id],
-                ['confirm' => __('Seguro que quieres eliminar # {0}?', $education->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Are you sure you want to delete # {0}?', $education->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('Listar estudios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Educations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="educations form content">
             <?= $this->Form->create($education) ?>
             <fieldset>
-                <legend><?= __('Editar estudio') ?></legend>
+                <legend><?= __('Edit Education') ?></legend>
                 <?php
-                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true, 'disabled' => true]);
+                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
                     echo $this->Form->control('nombre_titulacion');
                     echo $this->Form->control('ano_finalizacion');
                     echo $this->Form->control('institucion');
                     echo $this->Form->control('nivel_id', ['options' => $educationLevels, 'empty' => true]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Editar')) ?>
+            <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

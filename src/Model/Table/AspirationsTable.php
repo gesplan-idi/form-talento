@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * Aspirations Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\DisponibilitiesTable&\Cake\ORM\Association\BelongsTo $Disponibilities
  *
  * @method \App\Model\Entity\Aspiration newEmptyEntity()
  * @method \App\Model\Entity\Aspiration newEntity(array $data, array $options = [])
@@ -46,6 +47,10 @@ class AspirationsTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
+        $this->belongsTo('Disponibilities', [
+            'foreignKey' => 'disponibility_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**
@@ -65,8 +70,8 @@ class AspirationsTable extends Table
             ->allowEmptyString('intereses');
 
         $validator
-            ->boolean('posicion_interes')
-            ->allowEmptyString('posicion_interes');
+            ->boolean('posicion_interes_pregunta')
+            ->allowEmptyString('posicion_interes_pregunta');
 
         $validator
             ->boolean('proyecto_nacional')
@@ -77,9 +82,8 @@ class AspirationsTable extends Table
             ->allowEmptyString('proyecto_internacional');
 
         $validator
-            ->scalar('disponibilidad_retos')
-            ->maxLength('disponibilidad_retos', 50)
-            ->allowEmptyString('disponibilidad_retos');
+            ->integer('disponibility_id')
+            ->notEmptyString('disponibility_id');
 
         $validator
             ->boolean('disponibilidad_viajar')
@@ -107,6 +111,7 @@ class AspirationsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn('disponibility_id', 'Disponibilities'), ['errorField' => 'disponibility_id']);
 
         return $rules;
     }

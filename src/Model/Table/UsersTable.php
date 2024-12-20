@@ -11,6 +11,9 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property \App\Model\Table\PositionsTable&\Cake\ORM\Association\BelongsTo $Positions
+ * @property \App\Model\Table\ProfessionsTable&\Cake\ORM\Association\BelongsTo $Professions
+ * @property \App\Model\Table\NationalitiesTable&\Cake\ORM\Association\BelongsTo $Nationalities
  * @property \App\Model\Table\DepartmentsTable&\Cake\ORM\Association\BelongsTo $Departments
  * @property \App\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsTo $Categories
  * @property \App\Model\Table\ContractsTable&\Cake\ORM\Association\BelongsTo $Contracts
@@ -51,6 +54,15 @@ class UsersTable extends Table
         $this->setDisplayField('dni');
         $this->setPrimaryKey('id');
 
+        $this->belongsTo('Positions', [
+            'foreignKey' => 'position_id',
+        ]);
+        $this->belongsTo('Professions', [
+            'foreignKey' => 'profession_id',
+        ]);
+        $this->belongsTo('Nationalities', [
+            'foreignKey' => 'nationality_id',
+        ]);
         $this->belongsTo('Departments', [
             'foreignKey' => 'department_id',
         ]);
@@ -89,6 +101,11 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->scalar('role')
+            ->requirePresence('role', 'create')
+            ->notEmptyString('role');
+
+        $validator
             ->scalar('dni')
             ->maxLength('dni', 9)
             ->requirePresence('dni', 'create')
@@ -113,24 +130,36 @@ class UsersTable extends Table
             ->notEmptyDate('fecha_nacimiento');
 
         $validator
-            ->scalar('profesion')
-            ->maxLength('profesion', 255)
-            ->allowEmptyString('profesion');
-
-        $validator
-            ->scalar('puesto')
-            ->maxLength('puesto', 255)
-            ->allowEmptyString('puesto');
-
-        $validator
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmptyString('email');
 
         $validator
-            ->scalar('nacionalidad')
-            ->maxLength('nacionalidad', 50)
-            ->allowEmptyString('nacionalidad');
+            ->scalar('password')
+            ->maxLength('password', 255)
+            ->notEmptyString('password');
+
+        $validator
+            ->integer('position_id')
+            ->allowEmptyString('position_id');
+
+        $validator
+            ->scalar('puesto_otro')
+            ->maxLength('puesto_otro', 255)
+            ->allowEmptyString('puesto_otro');
+
+        $validator
+            ->integer('profession_id')
+            ->allowEmptyString('profession_id');
+
+        $validator
+            ->scalar('profesion_id_otro')
+            ->maxLength('profesion_id_otro', 255)
+            ->allowEmptyString('profesion_id_otro');
+
+        $validator
+            ->integer('nationality_id')
+            ->allowEmptyString('nationality_id');
 
         $validator
             ->scalar('foto')
@@ -159,18 +188,20 @@ class UsersTable extends Table
 
         $validator
             ->integer('experiencia_gesplan')
-            ->requirePresence('experiencia_gesplan', 'create')
-            ->notEmptyString('experiencia_gesplan');
+            ->allowEmptyString('experiencia_gesplan');
 
         $validator
             ->integer('experiencia_total')
-            ->requirePresence('experiencia_total', 'create')
-            ->notEmptyString('experiencia_total');
+            ->allowEmptyString('experiencia_total');
 
         $validator
-            ->scalar('disponibilidad_traslado')
-            ->maxLength('disponibilidad_traslado', 255)
-            ->allowEmptyString('disponibilidad_traslado');
+            ->boolean('disponibilidad_traslado')
+            ->notEmptyString('disponibilidad_traslado');
+
+        $validator
+            ->scalar('observ_disp_traslado')
+            ->maxLength('observ_disp_traslado', 255)
+            ->allowEmptyString('observ_disp_traslado');
 
         $validator
             ->boolean('formulario_aceptado')
@@ -190,6 +221,9 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
         $rules->add($rules->isUnique(['dni']), ['errorField' => 'dni']);
+        $rules->add($rules->existsIn('position_id', 'Positions'), ['errorField' => 'position_id']);
+        $rules->add($rules->existsIn('profession_id', 'Professions'), ['errorField' => 'profession_id']);
+        $rules->add($rules->existsIn('nationality_id', 'Nationalities'), ['errorField' => 'nationality_id']);
         $rules->add($rules->existsIn('department_id', 'Departments'), ['errorField' => 'department_id']);
         $rules->add($rules->existsIn('categoria_id', 'Categories'), ['errorField' => 'categoria_id']);
         $rules->add($rules->existsIn('contrato_id', 'Contracts'), ['errorField' => 'contrato_id']);

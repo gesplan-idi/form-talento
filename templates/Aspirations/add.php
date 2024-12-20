@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aspiration $aspiration
  * @var \Cake\Collection\CollectionInterface|string[] $users
+ * @var \Cake\Collection\CollectionInterface|string[] $disponibilities
  */
 ?>
 <div class="row">
@@ -18,18 +19,12 @@
             <fieldset>
                 <legend><?= __('Add Aspiration') ?></legend>
                 <?php
-                    // Si $user_id está definido, usa un campo oculto para pasarlo
-                    if (!empty($user_id)) {
-                        echo $this->Form->hidden('user_id', ['value' => $user_id]);
-                    } else {
-                        // Si no hay $user_id, muestra el selector de usuarios como antes
-                        echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
-                    }
+                    echo $this->Form->control('user_id', ['options' => $users, 'empty' => true]);
                     echo $this->Form->control('intereses');
-                    echo $this->Form->control('posicion_interes');
+                    echo $this->Form->control('posicion_interes_pregunta');
                     echo $this->Form->control('proyecto_nacional');
                     echo $this->Form->control('proyecto_internacional');
-                    echo $this->Form->control('disponibilidad_retos');
+                    echo $this->Form->control('disponibility_id', ['options' => $disponibilities]);
                     echo $this->Form->control('disponibilidad_viajar');
                     echo $this->Form->control('cambio_isla');
                     echo $this->Form->control('isla_destino');

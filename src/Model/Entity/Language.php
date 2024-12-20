@@ -10,12 +10,13 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string|null $user_id
- * @property string $idioma
+ * @property int $option_id
  * @property bool|null $certificado
  * @property string|null $institucion
  * @property int|null $nivel_id
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\LanguageOption $language_option
  * @property \App\Model\Entity\LanguageLevel $language_level
  */
 class Language extends Entity
@@ -31,11 +32,12 @@ class Language extends Entity
      */
     protected $_accessible = [
         'user_id' => true,
-        'idioma' => true,
+        'option_id' => true,
         'certificado' => true,
         'institucion' => true,
         'nivel_id' => true,
         'user' => true,
+        'language_option' => true,
         'language_level' => true,
     ];
 }

@@ -24,6 +24,7 @@ class LanguagesControllerTest extends TestCase
     protected $fixtures = [
         'app.Languages',
         'app.Users',
+        'app.LanguageOptions',
         'app.LanguageLevels',
     ];
 

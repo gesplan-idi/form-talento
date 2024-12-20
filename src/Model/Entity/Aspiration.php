@@ -11,15 +11,16 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string|null $user_id
  * @property string|null $intereses
- * @property bool|null $posicion_interes
+ * @property bool|null $posicion_interes_pregunta
  * @property bool|null $proyecto_nacional
  * @property bool|null $proyecto_internacional
- * @property string|null $disponibilidad_retos
+ * @property int $disponibility_id
  * @property bool|null $disponibilidad_viajar
  * @property bool|null $cambio_isla
  * @property string|null $isla_destino
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Disponibility $disponibility
  */
 class Aspiration extends Entity
 {
@@ -35,13 +36,14 @@ class Aspiration extends Entity
     protected $_accessible = [
         'user_id' => true,
         'intereses' => true,
-        'posicion_interes' => true,
+        'posicion_interes_pregunta' => true,
         'proyecto_nacional' => true,
         'proyecto_internacional' => true,
-        'disponibilidad_retos' => true,
+        'disponibility_id' => true,
         'disponibilidad_viajar' => true,
         'cambio_isla' => true,
         'isla_destino' => true,
         'user' => true,
+        'disponibility' => true,
     ];
 }

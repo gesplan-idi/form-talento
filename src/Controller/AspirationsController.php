@@ -19,16 +19,11 @@ class AspirationsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'Disponibilities'],
         ];
-        $user_id = $this->request->getAttribute('user_id');
-        if ($user_id) {
-            $aspirations = $this->paginate($this->Aspirations->find('all')->where(['Aspirations.user_id' => $user_id]));
-        } else {
-            $aspirations = $this->paginate($this->Aspirations);
-        }
+        $aspirations = $this->paginate($this->Aspirations);
 
-        $this->set(compact('aspirations', 'user_id'));
+        $this->set(compact('aspirations'));
     }
 
     /**
@@ -41,7 +36,7 @@ class AspirationsController extends AppController
     public function view($id = null)
     {
         $aspiration = $this->Aspirations->get($id, [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'Disponibilities'],
         ]);
 
         $this->set(compact('aspiration'));
@@ -55,13 +50,6 @@ class AspirationsController extends AppController
     public function add()
     {
         $aspiration = $this->Aspirations->newEmptyEntity();
-
-        // Obtener el user_id desde la URL
-        $user_id = $this->request->getQuery('user_id');
-        if ($user_id) {
-            $aspiration->user_id = $user_id;
-        }
-
         if ($this->request->is('post')) {
             $aspiration = $this->Aspirations->patchEntity($aspiration, $this->request->getData());
             if ($this->Aspirations->save($aspiration)) {
@@ -72,7 +60,8 @@ class AspirationsController extends AppController
             $this->Flash->error(__('The aspiration could not be saved. Please, try again.'));
         }
         $users = $this->Aspirations->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('aspiration', 'users', 'user_id'));
+        $disponibilities = $this->Aspirations->Disponibilities->find('list', ['limit' => 200])->all();
+        $this->set(compact('aspiration', 'users', 'disponibilities'));
     }
 
     /**
@@ -97,7 +86,8 @@ class AspirationsController extends AppController
             $this->Flash->error(__('The aspiration could not be saved. Please, try again.'));
         }
         $users = $this->Aspirations->Users->find('list', ['limit' => 200])->all();
-        $this->set(compact('aspiration', 'users'));
+        $disponibilities = $this->Aspirations->Disponibilities->find('list', ['limit' => 200])->all();
+        $this->set(compact('aspiration', 'users', 'disponibilities'));
     }
 
     /**

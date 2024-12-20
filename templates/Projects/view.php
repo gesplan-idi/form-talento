@@ -35,8 +35,9 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
-                            <th><?= __('Nombre Empresa') ?></th>
+                            <th><?= __('Project Id') ?></th>
                             <th><?= __('Otro Proyecto') ?></th>
+                            <th><?= __('Nombre Empresa') ?></th>
                             <th><?= __('Cargo') ?></th>
                             <th><?= __('Periodo Inicio') ?></th>
                             <th><?= __('Periodo Fin') ?></th>
@@ -44,15 +45,15 @@
                             <th><?= __('Logros') ?></th>
                             <th><?= __('Trabajos') ?></th>
                             <th><?= __('Tipo Id') ?></th>
-                            <th><?= __('Project Id') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($project->experiences as $experiences) : ?>
                         <tr>
                             <td><?= h($experiences->id) ?></td>
                             <td><?= h($experiences->user_id) ?></td>
-                            <td><?= h($experiences->nombre_empresa) ?></td>
+                            <td><?= h($experiences->project_id) ?></td>
                             <td><?= h($experiences->otro_proyecto) ?></td>
+                            <td><?= h($experiences->nombre_empresa) ?></td>
                             <td><?= h($experiences->cargo) ?></td>
                             <td><?= h($experiences->periodo_inicio) ?></td>
                             <td><?= h($experiences->periodo_fin) ?></td>
@@ -60,7 +61,6 @@
                             <td><?= h($experiences->logros) ?></td>
                             <td><?= h($experiences->trabajos) ?></td>
                             <td><?= h($experiences->tipo_id) ?></td>
-                            <td><?= h($experiences->project_id) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Experiences', 'action' => 'view', $experiences->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Experiences', 'action' => 'edit', $experiences->id]) ?>

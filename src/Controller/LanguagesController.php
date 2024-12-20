@@ -19,16 +19,11 @@ class LanguagesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'LanguageLevels'],
+            'contain' => ['Users', 'LanguageOptions', 'LanguageLevels'],
         ];
-        $user_id = $this->request->getAttribute('user_id');
-        if ($user_id) {
-            $languages = $this->paginate($this->Languages->find('all')->where(['Languages.user_id' => $user_id]));
-        } else {
-            $languages = $this->paginate($this->Languages);
-        }
+        $languages = $this->paginate($this->Languages);
 
-        $this->set(compact('languages', 'user_id'));
+        $this->set(compact('languages'));
     }
 
     /**
@@ -41,7 +36,7 @@ class LanguagesController extends AppController
     public function view($id = null)
     {
         $language = $this->Languages->get($id, [
-            'contain' => ['Users', 'LanguageLevels'],
+            'contain' => ['Users', 'LanguageOptions', 'LanguageLevels'],
         ]);
 
         $this->set(compact('language'));
@@ -55,13 +50,6 @@ class LanguagesController extends AppController
     public function add()
     {
         $language = $this->Languages->newEmptyEntity();
-
-        // Obtener el user_id desde la URL
-        $user_id = $this->request->getQuery('user_id');
-        if ($user_id) {
-            $language->user_id = $user_id;
-        }
-
         if ($this->request->is('post')) {
             $language = $this->Languages->patchEntity($language, $this->request->getData());
             if ($this->Languages->save($language)) {
@@ -72,8 +60,9 @@ class LanguagesController extends AppController
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
         $users = $this->Languages->Users->find('list', ['limit' => 200])->all();
+        $languageOptions = $this->Languages->LanguageOptions->find('list', ['limit' => 200])->all();
         $languageLevels = $this->Languages->LanguageLevels->find('list', ['limit' => 200])->all();
-        $this->set(compact('language', 'users', 'languageLevels', 'user_id'));
+        $this->set(compact('language', 'users', 'languageOptions', 'languageLevels'));
     }
 
     /**
@@ -98,8 +87,9 @@ class LanguagesController extends AppController
             $this->Flash->error(__('The language could not be saved. Please, try again.'));
         }
         $users = $this->Languages->Users->find('list', ['limit' => 200])->all();
+        $languageOptions = $this->Languages->LanguageOptions->find('list', ['limit' => 200])->all();
         $languageLevels = $this->Languages->LanguageLevels->find('list', ['limit' => 200])->all();
-        $this->set(compact('language', 'users', 'languageLevels'));
+        $this->set(compact('language', 'users', 'languageOptions', 'languageLevels'));
     }
 
     /**

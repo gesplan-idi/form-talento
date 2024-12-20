@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * Languages Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\LanguageOptionsTable&\Cake\ORM\Association\BelongsTo $LanguageOptions
  * @property \App\Model\Table\LanguageLevelsTable&\Cake\ORM\Association\BelongsTo $LanguageLevels
  *
  * @method \App\Model\Entity\Language newEmptyEntity()
@@ -47,6 +48,10 @@ class LanguagesTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
+        $this->belongsTo('LanguageOptions', [
+            'foreignKey' => 'option_id',
+            'joinType' => 'INNER',
+        ]);
         $this->belongsTo('LanguageLevels', [
             'foreignKey' => 'nivel_id',
         ]);
@@ -65,10 +70,8 @@ class LanguagesTable extends Table
             ->allowEmptyString('user_id');
 
         $validator
-            ->scalar('idioma')
-            ->maxLength('idioma', 50)
-            ->requirePresence('idioma', 'create')
-            ->notEmptyString('idioma');
+            ->integer('option_id')
+            ->notEmptyString('option_id');
 
         $validator
             ->boolean('certificado')
@@ -96,6 +99,7 @@ class LanguagesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn('option_id', 'LanguageOptions'), ['errorField' => 'option_id']);
         $rules->add($rules->existsIn('nivel_id', 'LanguageLevels'), ['errorField' => 'nivel_id']);
 
         return $rules;

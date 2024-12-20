@@ -34,13 +34,18 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
+                            <th><?= __('Role') ?></th>
                             <th><?= __('Dni') ?></th>
-                            <th><?= __('Nombre Apellidos') ?></th>
+                            <th><?= __('Nombre') ?></th>
+                            <th><?= __('Apellidos') ?></th>
                             <th><?= __('Fecha Nacimiento') ?></th>
-                            <th><?= __('Profesion') ?></th>
-                            <th><?= __('Puesto') ?></th>
                             <th><?= __('Email') ?></th>
-                            <th><?= __('Nacionalidad') ?></th>
+                            <th><?= __('Password') ?></th>
+                            <th><?= __('Position Id') ?></th>
+                            <th><?= __('Puesto Otro') ?></th>
+                            <th><?= __('Profession Id') ?></th>
+                            <th><?= __('Profesion Id Otro') ?></th>
+                            <th><?= __('Nationality Id') ?></th>
                             <th><?= __('Foto') ?></th>
                             <th><?= __('Discapacidad') ?></th>
                             <th><?= __('Department Id') ?></th>
@@ -50,19 +55,25 @@
                             <th><?= __('Experiencia Gesplan') ?></th>
                             <th><?= __('Experiencia Total') ?></th>
                             <th><?= __('Disponibilidad Traslado') ?></th>
+                            <th><?= __('Observ Disp Traslado') ?></th>
                             <th><?= __('Formulario Aceptado') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($workplace->users as $users) : ?>
                         <tr>
                             <td><?= h($users->id) ?></td>
+                            <td><?= h($users->role) ?></td>
                             <td><?= h($users->dni) ?></td>
-                            <td><?= h($users->nombre_apellidos) ?></td>
+                            <td><?= h($users->nombre) ?></td>
+                            <td><?= h($users->apellidos) ?></td>
                             <td><?= h($users->fecha_nacimiento) ?></td>
-                            <td><?= h($users->profesion) ?></td>
-                            <td><?= h($users->puesto) ?></td>
                             <td><?= h($users->email) ?></td>
-                            <td><?= h($users->nacionalidad) ?></td>
+                            <td><?= h($users->password) ?></td>
+                            <td><?= h($users->position_id) ?></td>
+                            <td><?= h($users->puesto_otro) ?></td>
+                            <td><?= h($users->profession_id) ?></td>
+                            <td><?= h($users->profesion_id_otro) ?></td>
+                            <td><?= h($users->nationality_id) ?></td>
                             <td><?= h($users->foto) ?></td>
                             <td><?= h($users->discapacidad) ?></td>
                             <td><?= h($users->department_id) ?></td>
@@ -72,6 +83,7 @@
                             <td><?= h($users->experiencia_gesplan) ?></td>
                             <td><?= h($users->experiencia_total) ?></td>
                             <td><?= h($users->disponibilidad_traslado) ?></td>
+                            <td><?= h($users->observ_disp_traslado) ?></td>
                             <td><?= h($users->formulario_aceptado) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>

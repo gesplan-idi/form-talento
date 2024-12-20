@@ -2,6 +2,9 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
+ * @var \Cake\Collection\CollectionInterface|string[] $positions
+ * @var \Cake\Collection\CollectionInterface|string[] $professions
+ * @var \Cake\Collection\CollectionInterface|string[] $nationalities
  * @var \Cake\Collection\CollectionInterface|string[] $departments
  * @var \Cake\Collection\CollectionInterface|string[] $categories
  * @var \Cake\Collection\CollectionInterface|string[] $contracts
@@ -21,18 +24,18 @@
             <fieldset>
                 <legend><?= __('Add User') ?></legend>
                 <?php
+                    echo $this->Form->control('role');
                     echo $this->Form->control('dni');
                     echo $this->Form->control('nombre');
                     echo $this->Form->control('apellidos');
                     echo $this->Form->control('fecha_nacimiento');
-                    echo $this->Form->control('profesion');
-                    echo $this->Form->control('puesto');
-                    if (isset($email)) {
-                        echo $this->Form->hidden('email', ['value' => $email]);
-                    } else {
-                        echo $this->Form->control('email');
-                    }
-                    echo $this->Form->control('nacionalidad');
+                    echo $this->Form->control('email');
+                    echo $this->Form->control('password');
+                    echo $this->Form->control('position_id', ['options' => $positions, 'empty' => true]);
+                    echo $this->Form->control('puesto_otro');
+                    echo $this->Form->control('profession_id', ['options' => $professions, 'empty' => true]);
+                    echo $this->Form->control('profesion_id_otro');
+                    echo $this->Form->control('nationality_id', ['options' => $nationalities, 'empty' => true]);
                     echo $this->Form->control('foto');
                     echo $this->Form->control('discapacidad');
                     echo $this->Form->control('department_id', ['options' => $departments, 'empty' => true]);
@@ -42,6 +45,7 @@
                     echo $this->Form->control('experiencia_gesplan');
                     echo $this->Form->control('experiencia_total');
                     echo $this->Form->control('disponibilidad_traslado');
+                    echo $this->Form->control('observ_disp_traslado');
                     echo $this->Form->control('formulario_aceptado');
                 ?>
             </fieldset>

@@ -12,8 +12,8 @@ use Cake\Validation\Validator;
  * Experiences Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ExperienceTypesTable&\Cake\ORM\Association\BelongsTo $ExperienceTypes
  * @property \App\Model\Table\ProjectsTable&\Cake\ORM\Association\BelongsTo $Projects
+ * @property \App\Model\Table\ExperienceTypesTable&\Cake\ORM\Association\BelongsTo $ExperienceTypes
  *
  * @method \App\Model\Entity\Experience newEmptyEntity()
  * @method \App\Model\Entity\Experience newEntity(array $data, array $options = [])
@@ -48,12 +48,12 @@ class ExperiencesTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
         ]);
+        $this->belongsTo('Projects', [
+            'foreignKey' => 'project_id',
+        ]);
         $this->belongsTo('ExperienceTypes', [
             'foreignKey' => 'tipo_id',
             'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Projects', [
-            'foreignKey' => 'project_id',
         ]);
     }
 
@@ -70,14 +70,18 @@ class ExperiencesTable extends Table
             ->allowEmptyString('user_id');
 
         $validator
-            ->scalar('nombre_empresa')
-            ->maxLength('nombre_empresa', 255)
-            ->allowEmptyString('nombre_empresa');
+            ->integer('project_id')
+            ->allowEmptyString('project_id');
 
         $validator
             ->scalar('otro_proyecto')
             ->maxLength('otro_proyecto', 255)
             ->allowEmptyString('otro_proyecto');
+
+        $validator
+            ->scalar('nombre_empresa')
+            ->maxLength('nombre_empresa', 255)
+            ->allowEmptyString('nombre_empresa');
 
         $validator
             ->scalar('cargo')
@@ -108,10 +112,6 @@ class ExperiencesTable extends Table
             ->integer('tipo_id')
             ->notEmptyString('tipo_id');
 
-        $validator
-            ->integer('project_id')
-            ->allowEmptyString('project_id');
-
         return $validator;
     }
 
@@ -125,8 +125,8 @@ class ExperiencesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
-        $rules->add($rules->existsIn('tipo_id', 'ExperienceTypes'), ['errorField' => 'tipo_id']);
         $rules->add($rules->existsIn('project_id', 'Projects'), ['errorField' => 'project_id']);
+        $rules->add($rules->existsIn('tipo_id', 'ExperienceTypes'), ['errorField' => 'tipo_id']);
 
         return $rules;
     }

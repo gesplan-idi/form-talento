@@ -13,13 +13,13 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
-                    <th><?= $this->Paginator->sort('nombre_empresa') ?></th>
+                    <th><?= $this->Paginator->sort('project_id') ?></th>
                     <th><?= $this->Paginator->sort('otro_proyecto') ?></th>
+                    <th><?= $this->Paginator->sort('nombre_empresa') ?></th>
                     <th><?= $this->Paginator->sort('cargo') ?></th>
                     <th><?= $this->Paginator->sort('periodo_inicio') ?></th>
                     <th><?= $this->Paginator->sort('periodo_fin') ?></th>
                     <th><?= $this->Paginator->sort('tipo_id') ?></th>
-                    <th><?= $this->Paginator->sort('project_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -28,13 +28,13 @@
                 <tr>
                     <td><?= $this->Number->format($experience->id) ?></td>
                     <td><?= $experience->has('user') ? $this->Html->link($experience->user->dni, ['controller' => 'Users', 'action' => 'view', $experience->user->id]) : '' ?></td>
-                    <td><?= h($experience->nombre_empresa) ?></td>
+                    <td><?= $experience->has('project') ? $this->Html->link($experience->project->nombre, ['controller' => 'Projects', 'action' => 'view', $experience->project->id]) : '' ?></td>
                     <td><?= h($experience->otro_proyecto) ?></td>
+                    <td><?= h($experience->nombre_empresa) ?></td>
                     <td><?= h($experience->cargo) ?></td>
                     <td><?= h($experience->periodo_inicio) ?></td>
                     <td><?= h($experience->periodo_fin) ?></td>
                     <td><?= $experience->has('experience_type') ? $this->Html->link($experience->experience_type->nombre, ['controller' => 'ExperienceTypes', 'action' => 'view', $experience->experience_type->id]) : '' ?></td>
-                    <td><?= $experience->has('project') ? $this->Html->link($experience->project->nombre, ['controller' => 'Projects', 'action' => 'view', $experience->project->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $experience->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $experience->id]) ?>

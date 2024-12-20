@@ -20,7 +20,7 @@ class SkillsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'user_id' => '2f28e9fe-9495-42c2-92fb-6aca2fd40d9d',
+                'user_id' => '9c6b41c1-7f48-4e32-bc79-76530d284470',
                 'skill_category_id' => 1,
                 'otros' => 'Lorem ipsum dolor sit amet',
             ],
